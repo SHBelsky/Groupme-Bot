@@ -1,4 +1,4 @@
-var cmds = [cmdFlipCoin, cmdRollDice];
+var cmds = [cmdFlipCoin, cmdRollDice, cmdFunnyFace];
 
 exports.checkCommands = function(dataHash, callback) {
   for (cmd in cmds) {
@@ -17,7 +17,8 @@ exports.checkCommands = function(dataHash, callback) {
 exports.getCmdListDescription = function () {
   cmdArr = [
     {cmd: "/flipcoin", desc: "Returns heads or tails 50/50 chance", fun: true},
-    {cmd: "/roll #d#", desc: "Will simulate a random dice roll of # number dice and # sides. EX: /roll 2d6 will roll two six sided dice.", fun: true}
+    {cmd: "/roll #d#", desc: "Will simulate a random dice roll of # number dice and # sides. EX: /roll 2d6 will roll two six sided dice.", fun: true},
+    {cmd: "/funnyface", desc: "Returns a random funny face", fun: true}
   ];
 
   return cmdArr;
@@ -37,6 +38,16 @@ function cmdFlipCoin(request){
   } else {
     return false;
   }
+}
+
+function cmdFunnyFace(request) {
+    var regex = /^\/flipcoin$/i;
+
+    if (regex.test(request.text)) {
+        return require('cool-ascii-faces')();
+    } else {
+        return false;
+    }
 }
 
 function cmdRollDice(request){
