@@ -1,40 +1,73 @@
-var cmds = [cmdChuckNorris, cmdFactSphere, cmdFlipCoin, cmdKnockKnockJokes, cmdRollDice, cmdFunnyFace, cmdGangly, cmdRNG, cmdSavvas, cmdWarrenHall, cmdWater];
+var cmds = [cmdChuckNorris, cmdFactSphere, cmdFlipCoin, cmdHelp, cmdKnockKnockJokes, cmdRollDice, cmdFunnyFace, cmdGangly, cmdRNG, cmdSavvas, cmdWarrenHall, cmdWater];
 
 exports.checkCommands = function(dataHash, callback) {
-  for (cmd in cmds) {
-    var test = cmds[cmd](dataHash.request, callback);
-    if (test) {
-      if (!dataHash.funMode){
-        callback(true, "Sorry I'm no fun right now", []);
-        return test;
-      }
-      callback(true, test, []);
-      return test;
+    for (cmd in cmds) {
+        var test = cmds[cmd](dataHash.request, callback);
+        if (test) {
+            if (!dataHash.funMode){
+                callback(true, "Sorry I'm no fun right now", []);
+                return test;
+            }
+            callback(true, test, []);
+            return test;
+        }
     }
-  }
-}
+};
 
 exports.getCmdListDescription = function () {
-  cmdArr = [
-    {cmd: "/flipcoin", desc: "Returns heads or tails 50/50 chance", fun: true},
-    {cmd: "/roll #d#", desc: "Will simulate a random dice roll of # number dice and # sides. EX: /roll 2d6 will roll two six sided dice.", fun: true},
-    {cmd: "/funnyface", desc: "Returns a random funny face", fun: true}
-  ];
+    cmdArr = [
+        {cmd: "/chucknorris", desc: "Returns a Chuck Norris fact based off of the current user.", fun: true},
+        {cmd: "/factsphere",  desc: "Returns a random fact from the Portal 2 Fact Sphere. Facts may not be entirely accurate.", fun: true},
+        {cmd: "/flipcoin",    desc: "Returns heads or tails 50/50 chance", fun: true},
+        {cmd: "/funnyface",   desc: "Returns a random funny face", fun: true},
+        {cmd: "/knockknock",  desc: "Tells a random knock-knock joke", fun: true},
+        {cmd: "/rng #",       desc: "Returns a random number from 1 to # (inclusive)", fun: true},
+        {cmd: "/roll #d#",    desc: "Will simulate a random dice roll of # number dice and # sides. EX: /roll 2d6 will roll two six sided dice.", fun: true},
+    ];
 
   return cmdArr;
 }
 
-function cmdChuckNorris(request, cb) {
+function cmdChuckNorris(request, callback) {
+    console.log(request, callback);
     var regex = /^\/chucknorris$/i;
-    if (regex.test(request.text)) {
-        var requestAPI = require("request");
-        requestAPI("http://api.icndb.com/jokes/random", function (error, response, body) {
-            var norris = JSON.parse(body);
-            return cb(null, norris.value.joke);
-      });
-    }
-    else {
-      return false;
+    if (regex.test(request)){
+        if(!funMode){
+            callback(true, "Sorry I'm no fun right now.", []);
+            return "Sorry I'm no fun right now.";
+        }
+
+        console.log(request);
+
+        var options = {
+            hostname: "api.icndb.com/jokes/random",
+            path: "/v0/random",
+            rejectUnauthorized: false
+        };
+
+        var callbackAPI = function(response) {
+            var str = '';
+
+            response.on('data', function(chunk) {
+                str += chunk;
+            });
+
+            response.on('end', function() {
+                str = JSON.parse(str);
+
+                var msg = '';
+                if (typeof(str.value) !== 'undefined'){
+                    msg = str.value.joke;
+                } else {
+                    msg = "That's not even found in a fake internet dictionary.";
+                }
+
+                callback(true, msg, []);
+            });
+        };
+        HTTPS.request(options, callbackAPI).end();
+    } else {
+        return false;
     }
 }
 
@@ -181,6 +214,19 @@ function cmdKnockKnockJokes(request) {
         return require('knock-knock-jokes')();
     } else {
         return false;
+    }
+}
+
+function cmdHelp(request) {
+    var regex = /^\/help$/i;
+    if (regex.test(request.text)) {
+        var commands = exports.getCmdListDescription();
+        var helpStr = Object.keys(commands).map(function (key, index) {
+            var cmd =  commands[key].cmd;
+            var desc = commands[key].desc;
+            return cmd + ": " + desc + "\r\n";
+        });
+        return helpStr;
     }
 }
 
