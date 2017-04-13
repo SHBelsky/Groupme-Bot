@@ -9,6 +9,7 @@
   "dependencies": {
     "cool-ascii-faces": "^1.3.4",
     "director": "",
+    "https": "^1.0.0",
     "knock-knock-jokes": "^1.7.0",
     "mongodb": "",
     "random-js": "^1.0.8",

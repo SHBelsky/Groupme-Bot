@@ -1,5 +1,5 @@
 var cmds = [cmdChuckNorris, cmdFactSphere, cmdFlipCoin, cmdHelp, cmdKnockKnockJokes, cmdRollDice, cmdFunnyFace, cmdGangly, cmdRNG, cmdSavvas, cmdWarrenHall, cmdWater];
-
+var HTTPS = require('https');
 exports.checkCommands = function(dataHash, callback) {
     for (cmd in cmds) {
         var test = cmds[cmd](dataHash.request, callback);
