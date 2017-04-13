@@ -29,8 +29,7 @@ function cmdChuckNorris(request, cb) {
     if (regex.test(request.text)) {
         var requestAPI = require("request");
         requestAPI("http://api.icndb.com/jokes/random", function (error, response, body) {
-            console.log(response, "RESPONSE");
-            console.log(body, "BODY");
+            console.log(body, typeof body, body.value, "BODY");
             return "testing";
       });
     }
