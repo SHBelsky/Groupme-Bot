@@ -1,4 +1,4 @@
-var cmds = [cmdFactSphere, cmdFlipCoin, cmdRollDice, cmdFunnyFace];
+var cmds = [cmdFactSphere, cmdFlipCoin, cmdRollDice, cmdFunnyFace, cmdGangly, cmdSavvas];
 
 exports.checkCommands = function(dataHash, callback) {
   for (cmd in cmds) {
@@ -188,4 +188,24 @@ function cmdRollDice(request){
   } else {
     return false;
   }
+}
+
+function cmdGangly(request) {
+    var regex = /^\/gangly$/i;
+    if (regex.test(request.text)) {
+        return "https://i.groupme.com/960x640.png.6e802b237a414da4a93b814adfea7d97";
+    }
+    else {
+        return false;
+    }
+}
+
+function cmdSavvas(request) {
+    var regex = /^\/savvas$/i;
+    if (regex.test(request.text)) {
+      return "https://i.groupme.com/960x640.png.9fc402b59c3a4fd89b15cfa84bf10b79";
+    }
+    else {
+      return false;
+    }
 }
