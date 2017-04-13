@@ -12,7 +12,7 @@
     "knock-knock-jokes": "^1.7.0",
     "mongodb": "",
     "random-js": "^1.0.8",
-    "request": "^2.81.0"
+    "sync-request": "^4.0.2"
   },
   "engines": {
     "node": ">= 0.6.0",

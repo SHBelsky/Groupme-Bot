@@ -28,11 +28,10 @@ function cmdChuckNorris(request, cb) {
     var regex = /^\/chucknorris$/i;
     if (regex.test(request.text)) {
         var requestAPI = require("request");
-        requestAPI("http://api.icndb.com/jokes/random", function (error, response, body) {
-            var norris = JSON.parse(body);
-            console.log(norris.value, norris.value.joke);
-            return cb(norris.value.joke);
-      });
+
+        var syncRequest = require("sync-request");
+        var norris      = syncRequest("GET", "http://api.icndb.com/jokes/random");
+        console.log(norris, norris.getBody(), typeof norris.getBody());
     }
     else {
       return false;
