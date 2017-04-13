@@ -255,17 +255,15 @@ function cmdGangly(request) {
 }
 
 function cmdRNG(request) {
-    var regex = /^\/rng (\d+)d/i;
+    var regex = /^\/rng (\d+)/i;
     console.log(request.text);
     if (regex.test(request.text)) {
         console.log("yas");
       var val = regex.exec(request.text);
-      console.log(val);
       var random = require('random-js');
       return random.integer(1, parseInt(val[1]))(random.engines.nativeMath) + "";
     }
     else {
-        console.log("no");
         return false;
     }
 }
