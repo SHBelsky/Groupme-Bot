@@ -30,6 +30,7 @@ function cmdChuckNorris(request, cb) {
         var requestAPI = require("request");
         requestAPI("http://api.icndb.com/jokes/random", function (error, response, body) {
             var norris = JSON.parse(body);
+            console.log(norris.value, norris.value.joke);
             return cb(norris.value.joke);
       });
     }
