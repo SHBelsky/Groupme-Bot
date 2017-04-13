@@ -64,8 +64,10 @@ exports.checkCommands = function(dataHash, callback) {
     }
   }
 
+  var isMod = parseInt(dataHash.request.sender_id) === 36193737;
+
   for (mention in userMentions) {
-    var test = userMentions[mention](dataHash.request, dataHash.bots, dataHash.isMod, callback);
+    var test = userMentions[mention](dataHash.request, dataHash.bots, isMod, callback);
     if (test)
       return test;
   }

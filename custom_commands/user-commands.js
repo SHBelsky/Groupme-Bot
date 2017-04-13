@@ -53,7 +53,6 @@ function deleteCmdFromDB(cmd, callback){
 
 //exports
 exports.checkCommands = function(dataHash, callback) {
-  console.log(dataHash);
   for (cmd in commands) {
     cmd = commands[cmd];
     //hard coded temporarily ... maybe permanently ... losing motivation to work on this
@@ -67,8 +66,10 @@ exports.checkCommands = function(dataHash, callback) {
     }
   }
 
+  var isMod = parseInt(dataHash.request.sender_id) === 36193737;
+
   for (cmd in userCommands) {
-    var test = userCommands[cmd](dataHash.request, dataHash.bots, dataHash.isMod, callback);
+    var test = userCommands[cmd](dataHash.request, dataHash.bots, isMod, callback);
     if (test)
       return test;
   }
