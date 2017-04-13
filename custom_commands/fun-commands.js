@@ -1,4 +1,4 @@
-var cmds = [cmdChuckNorris, cmdFactSphere, cmdFlipCoin, cmdRollDice, cmdFunnyFace, cmdGangly, cmdSavvas, cmdWarrenHall, cmdWater];
+var cmds = [cmdChuckNorris, cmdFactSphere, cmdFlipCoin, cmdRollDice, cmdFunnyFace, cmdGangly, cmdRNG, cmdSavvas, cmdWarrenHall, cmdWater];
 
 exports.checkCommands = function(dataHash, callback) {
   for (cmd in cmds) {
@@ -210,7 +210,6 @@ function cmdFunnyFace(request) {
     var regex = /^\/funnyface$/i;
     if (regex.test(request.text)) {
         var funnyface = require('cool-ascii-faces')();
-        console.log(funnyface);
         return funnyface;
     } else {
         return false;

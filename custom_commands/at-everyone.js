@@ -59,7 +59,7 @@ function cmdAtEveryone(request, bots, isMod, owner, callback) {
     return msg;
   }
   else {
-    console.log("no");
+
   }
 }
 
