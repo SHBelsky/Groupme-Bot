@@ -255,6 +255,18 @@ function cmdGangly(request) {
     }
 }
 
+function cmdRNG(request) {
+    var regex = /^\/rng (\d+)d/i;
+    if (regex.test(request.text)) {
+      var val = regex.exec(request.text);
+      var random = require('random-js');
+      return random.integer(1, parseInt(val[1]))(random.engines.nativeMath);
+    }
+    else {
+        return false;
+    }
+}
+
 function cmdSavvas(request) {
     var regex = /^\/savvas$/i;
     if (regex.test(request.text)) {
