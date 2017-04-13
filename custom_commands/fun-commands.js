@@ -27,9 +27,11 @@ exports.getCmdListDescription = function () {
 function cmdChuckNorris(request, cb) {
     var regex = /^\/chucknorris$/i;
     if (regex.test(request.text)) {
-        var syncRequest = require("sync-request");
-        var norris      = syncRequest("GET", "http://api.icndb.com/jokes/random");
-        console.log(norris, typeof norris);
+        var requestAPI = require("request");
+        requestAPI("http://api.icndb.com/jokes/random", function (error, response, body) {
+            var norris = JSON.parse(body);
+            return cb(null, norris.value.joke);
+      });
     }
     else {
       return false;
