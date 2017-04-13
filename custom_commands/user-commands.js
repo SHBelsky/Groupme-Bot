@@ -53,6 +53,7 @@ function deleteCmdFromDB(cmd, callback){
 
 //exports
 exports.checkCommands = function(dataHash, callback) {
+  console.log(dataHash);
   for (cmd in commands) {
     cmd = commands[cmd];
     //hard coded temporarily ... maybe permanently ... losing motivation to work on this

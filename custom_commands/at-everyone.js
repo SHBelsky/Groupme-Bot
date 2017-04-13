@@ -25,6 +25,7 @@ function cmdAtEveryone(request, bots, isMod, owner, callback) {
   var reqText = request.text;
 
   if (regex.test(reqText)){
+    console.log("yas");
     var val = regex.exec(reqText);
 
     if (!owner.access_token)
@@ -56,6 +57,9 @@ function cmdAtEveryone(request, bots, isMod, owner, callback) {
     });
 
     return msg;
+  }
+  else {
+    console.log("no");
   }
 }
 
