@@ -29,18 +29,11 @@ exports.getCmdListDescription = function () {
 }
 
 function cmdChuckNorris(request, callback) {
-    console.log(request, callback);
     var regex = /^\/chucknorris$/i;
     if (regex.test(request)){
-        if(!funMode){
-            callback(true, "Sorry I'm no fun right now.", []);
-            return "Sorry I'm no fun right now.";
-        }
-
-        console.log(request);
-
+        console.log("yes");
         var options = {
-            hostname: "api.icndb.com/jokes/random",
+            hostname: "https://api.icndb.com/jokes/random",
             path: "/v0/random",
             rejectUnauthorized: false
         };
@@ -62,7 +55,7 @@ function cmdChuckNorris(request, callback) {
                     msg = "That's not even found in a fake internet dictionary.";
                 }
 
-                callback(true, msg, []);
+                callback(true, "TEST STRING...", []);
             });
         };
         HTTPS.request(options, callbackAPI).end();
@@ -224,9 +217,12 @@ function cmdHelp(request) {
         var helpStr = Object.keys(commands).map(function (key, index) {
             var cmd =  commands[key].cmd;
             var desc = commands[key].desc;
-            return cmd + ": " + desc + "\r\n";
+            return cmd + ": " + desc + "\n\n";
         });
         return helpStr;
+    }
+    else {
+        return false;
     }
 }
 
