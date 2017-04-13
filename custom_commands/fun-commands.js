@@ -27,8 +27,6 @@ exports.getCmdListDescription = function () {
 function cmdChuckNorris(request, cb) {
     var regex = /^\/chucknorris$/i;
     if (regex.test(request.text)) {
-        var requestAPI = require("request");
-
         var syncRequest = require("sync-request");
         var norris      = syncRequest("GET", "http://api.icndb.com/jokes/random");
         console.log(norris, norris.getBody(), typeof norris.getBody());
