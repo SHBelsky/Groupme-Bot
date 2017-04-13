@@ -30,7 +30,7 @@ exports.getCmdListDescription = function () {
 
 function cmdChuckNorris(request, callback) {
     var regex = /^\/chucknorris$/i;
-    if (regex.test(request)){
+    if (regex.test(request.text)){
         console.log("yes");
         var options = {
             hostname: "https://api.icndb.com/jokes/random",
@@ -60,6 +60,7 @@ function cmdChuckNorris(request, callback) {
         };
         HTTPS.request(options, callbackAPI).end();
     } else {
+        console.log("no");
         return false;
     }
 }
@@ -217,8 +218,9 @@ function cmdHelp(request) {
         var helpStr = Object.keys(commands).map(function (key, index) {
             var cmd =  commands[key].cmd;
             var desc = commands[key].desc;
-            return cmd + ": " + desc + "\n\n";
+            return cmd + ": " + desc + "\r\n";
         });
+        console.log(helpStr);
         return helpStr;
     }
     else {
