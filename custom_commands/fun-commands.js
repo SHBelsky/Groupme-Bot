@@ -29,7 +29,7 @@ function cmdChuckNorris(request, cb) {
     if (regex.test(request.text)) {
         var syncRequest = require("sync-request");
         var norris      = syncRequest("GET", "http://api.icndb.com/jokes/random");
-        console.log(norris, norris.getBody(), typeof norris.getBody());
+        console.log(norris.getBody(), typeof norris.getBody());
     }
     else {
       return false;
