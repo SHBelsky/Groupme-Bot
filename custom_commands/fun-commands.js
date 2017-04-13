@@ -33,8 +33,8 @@ function cmdChuckNorris(request, callback) {
     if (regex.test(request.text)){
         console.log("yes");
         var options = {
-            hostname: "https://api.icndb.com/jokes/random",
-            path: "/v0/random",
+            hostname: "api.icndb.com",
+            path: "/jokes/random",
             rejectUnauthorized: false
         };
 
