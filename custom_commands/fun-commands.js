@@ -41,10 +41,11 @@ function cmdFlipCoin(request){
 }
 
 function cmdFunnyFace(request) {
-    var regex = /^\/flipcoin$/i;
-
+    var regex = /^\/funnyface$/i;
     if (regex.test(request.text)) {
-        return require('cool-ascii-faces')();
+        var funnyface = require('cool-ascii-faces')();
+        console.log(funnyface);
+        return funnyface;
     } else {
         return false;
     }
