@@ -52,10 +52,10 @@ function cmdChuckNorris(request, callback) {
                 if (typeof(str.value) !== 'undefined'){
                     msg = str.value.joke;
                 } else {
-                    msg = "That's not even found in a fake internet dictionary.";
+                    msg = "Chuck Norris is disappointed in you.";
                 }
 
-                callback(true, "TEST STRING...", []);
+                callback(true, msg, []);
             });
         };
         HTTPS.request(options, callbackAPI).end();
