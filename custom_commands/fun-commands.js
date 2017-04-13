@@ -27,7 +27,8 @@ exports.getCmdListDescription = function () {
 function cmdChuckNorris(request, cb) {
     var regex = /^\/chucknorris$/i;
     if (regex.test(request.text)) {
-      request("http://api.icndb.com/jokes/random", function (error, response, body) {
+        var requestAPI = require("request");
+        requestAPI("http://api.icndb.com/jokes/random", function (error, response, body) {
           var responseJSON = JSON.parse(response);
           return cb(responseJSON.value.joke);
       });
